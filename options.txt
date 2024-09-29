@@ -1,0 +1,7 @@
+--verbose
+--stream-solver
+#--suffix dual
+#--no-save-solution
+--solver cplex
+--solver-options-string "lpmethod=4 solutiontype=2"
+--log-run
