@@ -1,0 +1,16 @@
+--scenario-name REF --outputs-dir outputs-REF
+--scenario-name RES_storage_H2 --outputs-dir outputs-RES_storage_H2 --input-alias gen_info.csv=gen_info_RES_storage_H2.csv 
+## May aim for 95 percent CO2 reduction compared to 2020 
+## (5 percent CO2 remaining in 2050 - to utilize CCS that efficiency of CO2-capture is maximum 95%)
+--scenario-name REF_5pctCO2 --outputs-dir outputs-REF-5pctCO2 --input-alias carbon_policies.csv=carbon_policies_5pctco.csv
+
+
+#--scenario-name RES_storage --outputs-dir outputs-RES_storage --module-list inputs/modules_noH2.txt --input-alias gen_info.csv=gen_info_RES_storage_H2.csv 
+#--scenario-name flex_by_zone --outputs-dir outputs-FLEX_zone --include-modules flexible_loads --input-alias flexible_loads.csv=flexible_loads_by_zone.csv
+#--scenario-name flex_all_zones --outputs-dir outputs-FLEX_all --include-modules flexible_loads --input-alias flexible_loads.csv=flexible_loads.csv
+#--scenario-name Tx0 --outputs-dir outputs-Tx0 --input-alias new_transmission_limit.csv=new_transmission_limit0.csv
+#--scenario-name Tx25 --outputs-dir outputs-Tx25 --input-alias new_transmission_limit.csv=new_transmission_limit25.csv
+#--scenario-name Tx50 --outputs-dir outputs-Tx50 --input-alias new_transmission_limit.csv=new_transmission_limit50.csv
+#--scenario-name Tx75 --outputs-dir outputs-Tx75 --input-alias new_transmission_limit.csv=new_transmission_limit75.csv 
+
+##--scenario-name ev --outputs-dir outputs-EV --module-list inputs/modules_ev.txt
