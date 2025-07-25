@@ -13,5 +13,4 @@ switch_model.transmission.transport.dispatch
 switch_model.generators.extensions.storage
 switch_model.policies.carbon_policies
 dates
-#hydrogen
 new_transmission_limit
