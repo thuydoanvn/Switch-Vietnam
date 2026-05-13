@@ -1,0 +1,7 @@
+ZONES,PERIOD,standard_load_addition,daily_shiftable_load_addition,baseload_load_addition,annual_shiftable_load_addition,annual_shiftable_load_min_cf
+VN00,2050,-0.2,0.2,0,0,0.35
+VN01,2050,-0.2,0.2,0,0,0.35
+VN02,2050,-0.2,0.2,0,0,0.35
+VN03,2050,-0.2,0.2,0,0,0.35
+VN04,2050,-0.2,0.2,0,0,0.35
+VN05,2050,-0.2,0.2,0,0,0.35
