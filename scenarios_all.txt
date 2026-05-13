@@ -1,0 +1,35 @@
+#--scenario-name BAU --outputs-dir outputs-BAU
+## switch solve-scenarios --scenario-list scenarios_all.txt
+### Progressive CO₂ Cap Scenarios
+#--scenario-name CO2Cap95 --outputs-dir outputs-CO2Cap95 --input-alias carbon_policies.csv=carbon_policies_95.csv
+#--scenario-name CO2Cap80 --outputs-dir outputs-CO2Cap80 --input-alias carbon_policies.csv=carbon_policies_80.csv
+#--scenario-name CO2Cap60 --outputs-dir outputs-CO2Cap60 --input-alias carbon_policies.csv=carbon_policies_60.csv
+#--scenario-name CO2Cap40 --outputs-dir outputs-CO2Cap40 --input-alias carbon_policies.csv=carbon_policies_40.csv
+#--scenario-name CO2Cap20 --outputs-dir outputs-CO2Cap20 --input-alias carbon_policies.csv=carbon_policies_20.csv
+#--scenario-name CO2Cap10 --outputs-dir outputs-CO2Cap10 --input-alias carbon_policies.csv=carbon_policies_10.csv
+#--scenario-name CO2Cap5 --outputs-dir outputs-CO2Cap5 --input-alias carbon_policies.csv=carbon_policies_5.csv
+#--scenario-name CO2Cap2 --outputs-dir outputs-CO2Cap2 --input-alias carbon_policies.csv=carbon_policies_2.csv
+#--scenario-name CO2Cap1 --outputs-dir outputs-CO2Cap1 --input-alias carbon_policies.csv=carbon_policies_1.csv
+#--scenario-name CO2Cap0 --outputs-dir outputs-CO2Cap0 --input-alias carbon_policies.csv=carbon_policies_0.csv
+##--scenario-name NetZero --outputs-dir outputs-NetZero --input-alias carbon_policies.csv=carbon_policies_0.csv
+
+###  REF (NetZero) + (Renewable) Technology Exclusion Scenarios
+--scenario-name NoSOL --outputs-dir outputs-NoSOL --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_ESOL_excluded.csv
+--scenario-name NoWIN --outputs-dir outputs-NoWIN --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_EWIN_excluded.csv
+--scenario-name NoWIN_OFF --outputs-dir outputs-NoWIN_OFF --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_EWIN_OFF_excluded.csv
+#--scenario-name NoCCS --outputs-dir outputs-NoCCS --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_CCS_excluded.csv
+--scenario-name NoNUC --outputs-dir outputs-NoNUC --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_ENUC_excluded.csv
+--scenario-name NoSTG_BTR --outputs-dir outputs-NoSTG_BTR --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_STG_BTR_excluded.csv
+--scenario-name NoSTG_PHS --outputs-dir outputs-NoSTG_PHS --input-alias carbon_policies.csv=carbon_policies_0.csv gen_info.csv=gen_info_STG_PHS_excluded.csv
+--scenario-name NoH2 --outputs-dir outputs-NoH2 --module-list inputs/modules_noH2.txt --input-alias carbon_policies.csv=carbon_policies_0.csv
+
+### NetZero + Transmission Limit Scenarios (need first set up transmission capacity limit based on CO2Cap0)
+--scenario-name Tx75 --outputs-dir outputs-Tx75 --input-alias carbon_policies.csv=carbon_policies_0.csv new_transmission_limit.csv=new_transmission_limit75.csv 
+--scenario-name Tx50 --outputs-dir outputs-Tx50 --input-alias carbon_policies.csv=carbon_policies_0.csv new_transmission_limit.csv=new_transmission_limit50.csv
+--scenario-name Tx25 --outputs-dir outputs-Tx25 --input-alias carbon_policies.csv=carbon_policies_0.csv new_transmission_limit.csv=new_transmission_limit25.csv
+--scenario-name Tx0 --outputs-dir outputs-Tx0 --input-alias carbon_policies.csv=carbon_policies_0.csv new_transmission_limit.csv=new_transmission_limit0.csv
+
+### NetZero + Flexible Demand
+#--scenario-name flex_zone --outputs-dir outputs-FLEX_zone --include-modules flexible_loads --input-alias carbon_policies.csv=carbon_policies_0.csv flexible_loads.csv=flexible_loads_by_zone.csv
+#--scenario-name flex_all --outputs-dir outputs-FLEX_all --include-modules flexible_loads --input-alias carbon_policies.csv=carbon_policies_0.csv flexible_loads.csv=flexible_loads_cross_zone.csv
+#--scenario-name flex_annual --outputs-dir outputs-FLEX_annual --include-modules flexible_loads --input-alias carbon_policies.csv=carbon_policies_0.csv flexible_loads.csv=flexible_loads_annual.csv
