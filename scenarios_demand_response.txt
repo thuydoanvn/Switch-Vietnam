@@ -1,0 +1,32 @@
+## "DEMAND RESPONSE + BAU 2050 (no restricitions on CO2 and technology)"
+
+## Base: Flat pricing
+--scenario-name DR-flat --outputs-dir outputs-DR-flat --module-list inputs/modules_dr.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-flat-pricing 
+
+## CPP - 3 peak hours/day, 10 days/year. 
+### Critical = Highest marginal cost (this is default option)
+--scenario-name BAU-DR-cpp-mc --outputs-dir outputs-BAU-DR-cpp-mc --module-list inputs/modules_dr.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-cpp-pricing --dr-cpp-hours-per-ts 3 --dr-cpp-timeseries-number 10
+--scenario-name cpp-mc-30days --outputs-dir outputs-cpp-mc-30days --module-list inputs/modules_dr.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-cpp-pricing --dr-cpp-hours-per-ts 3 --dr-cpp-timeseries-number 30
+### Critical = Highest CPP System Net Load
+--scenario-name BAU-DR_CPP_netload --outputs-dir outputs-BAU-DR-cpp-netload --module-list inputs/modules_dr.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-cpp-pricing --dr-cpp-peak-criteria "System Net Load" --dr-cpp-hours-per-ts 3 --dr-cpp-timeseries-number 10
+
+## TOU pricing: revenue neutral within each block. 3 blocks (B1, B2, B3) 
+## manually assign hours to tp_block: need input file: tp_block.csv (for block index) and add a column tp_block to timepoints.csv (for hour-block assignment)
+
+### non-consecutive block assignment
+#### Base TOU: EVN tariff for commercial and industrial sectors
+##### "python tp_block_assignment_EVN.py" to create inputs/timepoints_evn.csv
+--scenario-name BAU-DR-tou-evn --outputs-dir outputs-BAU-DR-tou-evn --module-list inputs/modules_dr_tou.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-tou-pricing --iterate-list iterate_tou.txt --input-alias timepoints.csv=timepoints_evn.csv
+#### Highest marginal cost in DR-BAU-flat
+##### "python tp_block_assignment_tou_mc_highest.py" to create inputs/timepoints_tou_mc.csv
+--scenario-name BAU-DR-tou-mc --outputs-dir outputs-BAU-DR-tou-mc --module-list inputs/modules_dr_tou.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-tou-pricing --iterate-list iterate_tou.txt --input-alias timepoints.csv=timepoints_tou_mc.csv
+
+### consecutive block assignment to minimize the within-block marginal cost variation, using an optimal split.
+#### "python tp_block_assignment_tou_mc_contiguous.py"  to create inputs/timepoints_tou_mc_con.csv
+--scenario-name BAU-DR-tou-mc-con --outputs-dir outputs-BAU-DR-tou-mc-con --module-list inputs/modules_dr_tou.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-tou-pricing --iterate-list iterate_tou.txt --input-alias timepoints.csv=timepoints_tou_mc_con.csv
+#### Auto dynamically assign hours to tp_block
+--scenario-name BAU-DR-tou-auto --outputs-dir outputs-BAU-DR-tou-auto --module-list inputs/modules_dr.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-tou-pricing --dr-tou-block-number 3 
+
+## Hybrid pricing (MC based)
+### consecutive block assignment (minimizing marginal cost variation) to identify 3 TOU blocks + 30 critical hours in BAU-DR-cpp-mc + revenue neutral within each block
+--scenario-name BAU-DR-hybrid-mc-new --outputs-dir outputs-BAU-DR-hybrid-mc-new --module-list inputs/modules_dr_tou.txt --dr-demand-module dr_iterative.constant_elasticity_demand_system --demand-response-reserve-types none --dr-tou-pricing --iterate-list iterate_tou.txt --input-alias timepoints.csv=timepoints_tou_cpp_new.csv tou_blocks.csv=tou_cpp_blocks.csv

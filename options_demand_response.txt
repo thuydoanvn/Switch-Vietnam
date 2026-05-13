@@ -1,0 +1,20 @@
+--verbose
+--stream-solver
+--suffix dual
+--no-save-solution
+--solver cplex
+--solver-options-string "lpmethod=4 solutiontype=2"
+--full-traceback
+--log-run
+
+--dr-demand-module dr_iterative.constant_elasticity_demand_system
+
+--demand-response-reserve-types none
+
+#--dr-flat-pricing
+#--dr-tou-pricing --dr-tou-block-number 3
+
+#--dr-cpp-pricing
+#--dr-cpp-hours-number 30
+#--dr-cpp-peak-criteria "Highest Marginal Cost"
+#--dr-cpp-peak-criteria "System Total Load"
